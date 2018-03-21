@@ -10,7 +10,7 @@ set_target_properties(
 	bulkmt PROPERTIES
 	CXX_STANDARD 14
 	CXX_STANDARD_REQUIRED ON
-	COMPILE_OPTIONS -Wpedantic -Wall -Wextra -pthread
+	COMPILE_OPTIONS -Wpedantic -Wall -Wextra
 )
 target_link_libraries (myapp Threads::Threads)
 install(TARGETS bulkmt RUNTIME DESTINATION bin)
