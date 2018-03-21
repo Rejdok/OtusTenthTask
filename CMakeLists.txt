@@ -12,7 +12,7 @@ set_target_properties(
 	CXX_STANDARD_REQUIRED ON
 	COMPILE_OPTIONS -Wpedantic -Wall -Wextra
 )
-target_link_libraries (myapp Threads::Threads)
+target_link_libraries (bulkmt Threads::Threads)
 install(TARGETS bulkmt RUNTIME DESTINATION bin)
 
 set(CPACK_GENERATOR "DEB")
