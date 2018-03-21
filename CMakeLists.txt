@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 3.2)
 
 project(bulkmt VERSION 0.0.$ENV{TRAVIS_BUILD_NUMBER})
 
+find_package (Threads)
+
 add_executable(bulkmt main.cpp)
 
 set_target_properties(
@@ -10,6 +12,7 @@ set_target_properties(
 	CXX_STANDARD_REQUIRED ON
 	COMPILE_OPTIONS -Wpedantic -Wall -Wextra
 )
+target_link_libraries (myapp ${CMAKE_THREAD_LIBS_INIT})
 install(TARGETS bulkmt RUNTIME DESTINATION bin)
 
 set(CPACK_GENERATOR "DEB")
