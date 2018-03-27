@@ -116,7 +116,7 @@ private:
 class CommandsProcessor {
 public:
 	CommandsProcessor(size_t countsOfThreads) {
-		isInputStreamOver = false;
+		*isInputStreamOver = false;
 		commandsQueue = std::make_shared<CommandQueueT>();
 		queueMutex = std::make_shared<QueueMutexT>();
 		fileCreateMutex = std::make_shared<FileMutexT>();
