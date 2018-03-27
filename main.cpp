@@ -253,7 +253,7 @@ public:
 			size_t countOfBlocks=0, countOfCommands=0,totalSleepTime=0;
 			std::tie(countOfBlocks,countOfCommands, totalSleepTime) = i.getCountOfBlocksAndCommands();
 			std::cout << "Thread " + std::to_string(threadCounter) << std::endl;
-			std::cout << "Count of blocks = " << countOfBlocks << " Count of commands = " << countOfCommands <<"Total sleep time ="<< totalSleepTime <<std::endl;
+			std::cout << "Count of blocks = " << countOfBlocks << " Count of commands = " << countOfCommands <<" Total sleep time ="<< totalSleepTime <<std::endl;
 			threadCounter++;
 		}
 	}
