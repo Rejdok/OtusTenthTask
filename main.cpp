@@ -73,7 +73,7 @@ public:
 			if(isLockMutexSucsesseful)
 				isQueueEmpty = commandsQueue->empty();
 			if (isLockMutexSucsesseful && !isQueueEmpty) {
-				if (commandsQueue->empty() && isInputStreamOver) {
+				if (commandsQueue->empty() && *isInputStreamOver) {
 					shouldTerminate = true;
 				}
 				auto commandsBlock =std::move(commandsQueue->front());
@@ -87,7 +87,7 @@ public:
 				if (isLockMutexSucsesseful) {
 					queueMutex->unlock();
 				}
-				if (isInputStreamOver && isQueueEmpty) {
+				if (*isInputStreamOver && isQueueEmpty) {
 					shouldTerminate = true;
 				}
 				else {
@@ -96,8 +96,6 @@ public:
 				}
 			}
 			if (shouldTerminate) {
-				totalSleepTime += 1;
-				std::this_thread::sleep_for(std::chrono::milliseconds(1));
 				return;
 			}
 		}
@@ -118,11 +116,11 @@ private:
 class CommandsProcessor {
 public:
 	CommandsProcessor(size_t countsOfThreads) {
+		isInputStreamOver = false;
 		commandsQueue = std::make_shared<CommandQueueT>();
 		queueMutex = std::make_shared<QueueMutexT>();
 		fileCreateMutex = std::make_shared<FileMutexT>();
 		isInputStreamOver= std::make_shared<std::atomic_bool>();
-		*isInputStreamOver = false;
 		workers.reserve(countsOfThreads);
 		IOFstreams.reserve(countsOfThreads);
 		for (size_t i = 0; i < countsOfThreads; i++) {
@@ -274,6 +272,7 @@ private:
 	const std::string startDynamicBlock = std::string({ "{" });
 	const std::string endDynamicBlock = std::string({ "}" });
 };
+
 
 int main(int argc, char **argv)
 {
